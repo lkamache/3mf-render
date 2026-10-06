@@ -43,3 +43,7 @@ Linha de comando (render sem janela):
 - Partes negativas, modificadores e bloqueadores de suporte não são desenhados (como no fatiador).
 - PrusaSlicer: volumes com extrusoras e pintura (`mmu_segmentation`).
 - 3MF genérico: `basematerials` / `colorgroup`.
+
+## Licença
+
+[MIT](LICENSE) © 2026 Leonardo Kamache
