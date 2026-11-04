@@ -4,6 +4,8 @@ App para macOS: uma janela pequena onde você arrasta um arquivo `.3mf` e vê o 
 
 Desenvolvido por **Leonardo Kamache**.
 
+**Versão atual: 1.2.1** (build 4) — [baixar o DMG](https://github.com/lkamache/3mf-render/releases/latest) (macOS 13+, Apple Silicon).
+
 ## Compilar
 
     ./build.sh          # gera build/3MF Render.app (precisa apenas das Command Line Tools)
@@ -11,7 +13,7 @@ Desenvolvido por **Leonardo Kamache**.
 ## Distribuir
 
     ./package.sh        # gera dist/3MF-Render-<versão>.dmg (Apple Silicon) com a versão atual
-    ./package.sh 1.2    # muda a versão para 1.2, incrementa o build e gera o DMG
+    ./package.sh 1.2.2  # muda a versão para 1.2.2, incrementa o build e gera o DMG
 
 - Sem certificado: assinatura ad-hoc. Quem baixar precisa liberar o app na primeira abertura
   (Ajustes do Sistema → Privacidade e Segurança → "Abrir Mesmo Assim").
@@ -32,6 +34,7 @@ Desenvolvido por **Leonardo Kamache**.
 - Arquivos com vários plates: menu no canto inferior esquerdo, ⌘[ e ⌘] para o plate anterior/próximo, ou clique com o botão direito para pular para o próximo (depois do último, volta ao primeiro).
 - "3D / Fatiador": alterna entre o render próprio e a imagem do plate 1 salva pelo Bambu Studio (quando existir).
 - ⌘S salva a imagem em PNG.
+- Com o 3MF Render instalado, os arquivos `.3mf` aparecem no Finder com o ícone dele (se ainda aparecer o ícone de outro app, rode `killall Finder`).
 
 Linha de comando (render sem janela):
 
