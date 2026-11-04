@@ -19,8 +19,10 @@
         <dict>
             <key>CFBundleTypeName</key><string>3MF Model</string>
             <key>CFBundleTypeRole</key><string>Viewer</string>
-            <key>LSHandlerRank</key><string>Alternate</string>
-            <key>CFBundleTypeExtensions</key><array><string>3mf</string></array>
+            <key>LSHandlerRank</key><string>Default</string>
+            <key>CFBundleTypeExtensions</key><array><string>3mf</string><string>3MF</string></array>
+            <key>CFBundleTypeIconSystemGenerated</key><true/>
+            <key>CFBundleTypeIconFile</key><string>AppIcon</string>
         </dict>
     </array>
 </dict>
