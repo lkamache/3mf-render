@@ -26,6 +26,7 @@ Desenvolvido por **Leonardo Kamache**.
 - Versão (`CFBundleShortVersionString`) e build (`CFBundleVersion`) ficam no `Info.plist`.
   Convenção: 1.1 → 1.1.1 para correções, 1.1 → 1.2 para funções novas, 2.0 para mudanças grandes.
   O script não aceita versão menor que a atual e, se falhar, desfaz a mudança de versão.
+  Ao terminar, ele também atualiza a linha "Versão atual" deste README.
 
 ## Usar
 

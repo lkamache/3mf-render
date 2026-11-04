@@ -43,6 +43,15 @@ cleanup() {
 }
 trap cleanup EXIT
 
+# Troca o valor de uma chave <string> do Info.plist sem reformatar o arquivo
+# (plutil -replace reescreve tudo, ordenando as chaves e mudando a indentação).
+set_plist_string() {  # $1 = chave, $2 = valor
+    sed -i '' -E "s|(<key>$1</key>[[:space:]]*<string>)[^<]*(</string>)|\\1$2\\2|" Info.plist
+    if [[ "$(plutil -extract "$1" raw Info.plist)" != "$2" ]]; then
+        plutil -replace "$1" -string "$2" Info.plist   # formato inesperado: cai no plutil
+    fi
+}
+
 # --- Versão
 # CFBundleShortVersionString = versão visível (1.2); CFBundleVersion = build (sobe a cada versão nova).
 CUR_VERSION=$(plutil -extract CFBundleShortVersionString raw Info.plist)
@@ -56,8 +65,8 @@ if [[ -n "$NEW_VERSION" ]]; then
     [[ "$CUR_BUILD" =~ '^[0-9]+$' ]] || fail "CFBundleVersion atual ('$CUR_BUILD') não é um número inteiro."
     PLIST_BACKUP=$(mktemp)
     cp Info.plist "$PLIST_BACKUP"
-    plutil -replace CFBundleShortVersionString -string "$NEW_VERSION" Info.plist
-    plutil -replace CFBundleVersion -string "$((CUR_BUILD + 1))" Info.plist
+    set_plist_string CFBundleShortVersionString "$NEW_VERSION"
+    set_plist_string CFBundleVersion "$((CUR_BUILD + 1))"
 fi
 VERSION=$(plutil -extract CFBundleShortVersionString raw Info.plist)
 BUILD=$(plutil -extract CFBundleVersion raw Info.plist)
@@ -155,6 +164,8 @@ if [[ $DEVELOPER_ID == 1 ]]; then
 fi
 
 PACKAGED=1
+# Mantém a linha "Versão atual" do README em dia.
+sed -i '' -E "s|^\*\*Versão atual: [^*]+\*\* \(build [0-9]+\)|**Versão atual: $VERSION** (build $BUILD)|" README.md
 step "Pronto: $DMG — versão $VERSION (build $BUILD), $(du -h "$DMG" | cut -f1 | tr -d ' ')"
 if [[ $DEVELOPER_ID == 0 ]]; then
     cat <<'EOF'
